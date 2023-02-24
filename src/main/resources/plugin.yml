@@ -1,0 +1,5 @@
+name: "${name}"
+main: me.yoku.nmsmodule.NMSModule
+version: "${version}"
+api-version: "${apiVersion}"
+authors: [ Yoku ]
