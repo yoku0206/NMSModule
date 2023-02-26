@@ -1,6 +1,9 @@
 # Project exclude paths
 /.gradle/
 /build/
+/API/build
 /Core/build/
 /Core/build/classes/kotlin/main/
+/CraftBukkit_1_17_R1/build
+/CraftBukkit_1_19_R2/build
 /CraftBukkit_1_19_R1/build/

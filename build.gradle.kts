@@ -13,9 +13,9 @@ plugins {
 }
 
 group = "me.yoku"
-version = "1.0"
+version = "2.0"
 
-val mcVersion = "1.19"
+val mcVersion = "1.17"
 val github = Properties().apply { load(FileInputStream(File("${System.getenv("USERPROFILE")}/.m2/", "github.properties"))) }
 
 allprojects {
@@ -43,7 +43,7 @@ subprojects {
     }
 
     group = parent?.group ?: "me.yoku"
-    version = parent?.version ?: "1.0"
+    version = parent?.version ?: "2.0"
 
     tasks.compileKotlin {
         kotlinOptions.jvmTarget = "11"
@@ -57,10 +57,12 @@ repositories {
 
 dependencies {
 
-    compileOnly(group = "org.spigotmc", name = "spigot-api", version = "1.19.2-R0.1-SNAPSHOT")
-
-    implementation(project(":CraftBukkit_1_19_R1", configuration = "shadow"))
+    implementation(project(":API", configuration = "shadow"))
     implementation(project(":Core", configuration = "shadow"))
+
+//    implementation(project(":CraftBukkit_1_17_R1", configuration = "shadow"))
+    implementation(project(":CraftBukkit_1_19_R1", configuration = "shadow"))
+//    implementation(project(":CraftBukkit_1_19_R2", configuration = "shadow"))
 
 }
 
@@ -96,8 +98,11 @@ tasks {
         archiveVersion.set("")
 
         minimize() {
+            exclude(project("API"))
             exclude(project(":Core"))
+            exclude(project(":CraftBukkit_1_17_R1"))
             exclude(project(":CraftBukkit_1_19_R1"))
+            exclude(project(":CraftBukkit_1_19_R2"))
         }
 
 //        finalizedBy(remapJar)
@@ -129,10 +134,18 @@ publishing {
             artifactId = "nmsmodule"
             version = rootProject.version as String
 
-            from(components["java"])
-            artifact(tasks["shadowJar"])
+//            from(components["java"])
+//            artifact(tasks["shadowJar"])
 
             shadow.component(this)
+
+            pom.withXml {
+
+                val s = asString().toString()
+
+                asString().clear().append(s.replace("<dependencies/>", ""))
+
+            }
         }
     }
 
