@@ -1,24 +1,25 @@
 plugins {
     id("org.jetbrains.kotlin.jvm")
     id("com.github.johnrengelman.shadow")
-    id("io.github.rancraftplayz.remapper")
+    id("io.github.patrick.remapper")
 }
 
 dependencies {
 
     compileOnly(group = "org.spigotmc", name = "spigot", version = "1.19.3-R0.1-SNAPSHOT", classifier = "remapped-mojang")
 
-    implementation(project(":API"))
-
-    remapLib("org.spigotmc:spigot:1.19.3-R0.1-SNAPSHOT:remapped-mojang")
-    accessWidenerLib("org.spigotmc:spigot:1.19.3-R0.1-SNAPSHOT:remapped-mojang")
-}
-
-spigot {
-    version = "1.19.3"
+    implementation(project(":API")) { artifact { type = "jar" } }
+    implementation(project(":API", configuration = "shadow"))
 }
 
 tasks {
+
+    remap {
+
+        version.set("1.19.3")
+
+        dependsOn(shadowJar)
+    }
 
     shadowJar {
 
@@ -26,19 +27,11 @@ tasks {
         archiveClassifier.set("")
         archiveVersion.set("")
 
-        finalizedBy(remapJar)
-
-    }
-
-    remapJar {
-
-        dependsOn(shadowJar)
-
     }
 
     build {
 
-        dependsOn(remapJar)
+        dependsOn(remap)
 
     }
 

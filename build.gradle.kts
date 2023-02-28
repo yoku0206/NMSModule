@@ -8,7 +8,7 @@ plugins {
     java
     kotlin("jvm") version "1.8.0"
     id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("io.github.rancraftplayz.remapper") version "1.0.2"
+    id("io.github.patrick.remapper") version "1.4.0"
     id("maven-publish")
 }
 
@@ -38,7 +38,7 @@ subprojects {
 
         plugin("org.jetbrains.kotlin.jvm")
         plugin("com.github.johnrengelman.shadow")
-        plugin("io.github.rancraftplayz.remapper")
+        plugin("io.github.patrick.remapper")
 
     }
 
@@ -60,9 +60,9 @@ dependencies {
     implementation(project(":API", configuration = "shadow"))
     implementation(project(":Core", configuration = "shadow"))
 
-//    implementation(project(":CraftBukkit_1_17_R1", configuration = "shadow"))
+    implementation(project(":CraftBukkit_1_17_R1", configuration = "shadow"))
     implementation(project(":CraftBukkit_1_19_R1", configuration = "shadow"))
-//    implementation(project(":CraftBukkit_1_19_R2", configuration = "shadow"))
+    implementation(project(":CraftBukkit_1_19_R2", configuration = "shadow"))
 
 }
 
@@ -105,18 +105,21 @@ tasks {
             exclude(project(":CraftBukkit_1_19_R2"))
         }
 
-//        finalizedBy(remapJar)
     }
 
-    remapJar {
+    register("RemapAll") {
 
-        dependsOn(shadowJar)
+        dependsOn(":CraftBukkit_1_17_R1:build")
+        dependsOn(":CraftBukkit_1_19_R1:build")
+        dependsOn(":CraftBukkit_1_19_R2:build")
 
+        finalizedBy(shadowJar)
     }
 
     build {
-//        dependsOn(remapJar)
-        dependsOn(shadowJar)
+
+        dependsOn("RemapAll")
+
     }
 }
 

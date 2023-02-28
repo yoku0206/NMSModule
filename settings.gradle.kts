@@ -6,3 +6,6 @@ include("Core")
 include("API")
 include("CraftBukkit_1_17_R1")
 include("CraftBukkit_1_19_R2")
+
+setOf("API", "Core", "CraftBukkit_1_17_R1", "CraftBukkit_1_19_R1", "CraftBukkit_1_19_R2")
+    .forEach { project(":$it").projectDir = file(it) }

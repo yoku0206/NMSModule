@@ -21,7 +21,7 @@ open class CodeNBTItem : NBTItem {
 
         this.item = item
 
-        this.nmsItem = CraftItemStack.asNMSCopy(item)
+        this.nmsItem = CraftItemStack.asNMSCopy(this.item)
 
         this.tag = this.nmsItem.tag ?: CompoundTag()
     }
