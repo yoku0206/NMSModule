@@ -91,6 +91,5 @@ open class CodeNBTList<T> : NBTList<T> {
 
     override fun hashCode(): Int { return getNMSTag().hashCode() }
 
-    override fun equals(other: Any?): Boolean { return other is NBTList<*> && getNMSTag() == (other as CodeNBTList<*>).getNMSTag()
-    }
+    override fun equals(other: Any?): Boolean { return other is NBTList<*> && getNMSTag() == (other as CodeNBTList<*>).getNMSTag() }
 }
