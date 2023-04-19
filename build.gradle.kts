@@ -13,7 +13,7 @@ plugins {
 }
 
 group = "me.yoku"
-version = "2.0"
+version = "3.0"
 
 val mcVersion = "1.17"
 val github = Properties().apply { load(FileInputStream(File("${System.getenv("USERPROFILE")}/.m2/", "github.properties"))) }
@@ -63,6 +63,7 @@ dependencies {
     implementation(project(":CraftBukkit_1_17_R1", configuration = "shadow"))
     implementation(project(":CraftBukkit_1_19_R1", configuration = "shadow"))
     implementation(project(":CraftBukkit_1_19_R2", configuration = "shadow"))
+    implementation(project(":CraftBukkit_1_19_R3", configuration = "shadow"))
 
 }
 
@@ -103,6 +104,7 @@ tasks {
             exclude(project(":CraftBukkit_1_17_R1"))
             exclude(project(":CraftBukkit_1_19_R1"))
             exclude(project(":CraftBukkit_1_19_R2"))
+            exclude(project(":CraftBukkit_1_19_R3"))
         }
 
     }
@@ -112,8 +114,15 @@ tasks {
         dependsOn(":CraftBukkit_1_17_R1:build")
         dependsOn(":CraftBukkit_1_19_R1:build")
         dependsOn(":CraftBukkit_1_19_R2:build")
+        dependsOn(":CraftBukkit_1_19_R3:build")
 
         finalizedBy(shadowJar)
+    }
+
+    publish {
+
+        dependsOn("RemapAll")
+
     }
 
     build {
