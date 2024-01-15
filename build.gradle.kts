@@ -13,7 +13,7 @@ plugins {
 }
 
 group = "me.yoku"
-version = "3.0"
+version = "4.0"
 
 val mcVersion = "1.17"
 val github = Properties().apply { load(FileInputStream(File("${System.getenv("USERPROFILE")}/.m2/", "github.properties"))) }
@@ -43,7 +43,7 @@ subprojects {
     }
 
     group = parent?.group ?: "me.yoku"
-    version = parent?.version ?: "2.0"
+    version = parent?.version ?: "4.0"
 
     tasks.compileKotlin {
         kotlinOptions.jvmTarget = "11"
@@ -64,6 +64,9 @@ dependencies {
     implementation(project(":CraftBukkit_1_19_R1", configuration = "shadow"))
     implementation(project(":CraftBukkit_1_19_R2", configuration = "shadow"))
     implementation(project(":CraftBukkit_1_19_R3", configuration = "shadow"))
+    implementation(project(":CraftBukkit_1_20_R1", configuration = "shadow"))
+    implementation(project(":CraftBukkit_1_20_R2", configuration = "shadow"))
+    implementation(project(":CraftBukkit_1_20_R3", configuration = "shadow"))
 
 }
 
@@ -105,6 +108,9 @@ tasks {
             exclude(project(":CraftBukkit_1_19_R1"))
             exclude(project(":CraftBukkit_1_19_R2"))
             exclude(project(":CraftBukkit_1_19_R3"))
+            exclude(project(":CraftBukkit_1_20_R1"))
+            exclude(project(":CraftBukkit_1_20_R2"))
+            exclude(project(":CraftBukkit_1_20_R3"))
         }
 
     }
@@ -115,6 +121,9 @@ tasks {
         dependsOn(":CraftBukkit_1_19_R1:build")
         dependsOn(":CraftBukkit_1_19_R2:build")
         dependsOn(":CraftBukkit_1_19_R3:build")
+        dependsOn(":CraftBukkit_1_20_R1:build")
+        dependsOn(":CraftBukkit_1_20_R2:build")
+        dependsOn(":CraftBukkit_1_20_R3:build")
 
         finalizedBy(shadowJar)
     }
