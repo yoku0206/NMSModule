@@ -1,0 +1,99 @@
+package me.yoku.api
+
+import java.util.*
+
+interface INBTItem {
+
+    fun set(key: String, value: Any) : INBTItem
+
+    fun setBoolean(key: String, value: Boolean) : INBTItem
+
+    fun setByte(key: String, value: Byte) : INBTItem
+
+    fun setByteArray(key: String, value: ByteArray) : INBTItem
+
+    fun setCompound(key: String, value: NBTCompound) : INBTItem
+
+    fun setDouble(key: String, value: Double) : INBTItem
+
+    fun setFloat(key: String, value: Float) : INBTItem
+
+    fun setInt(key: String, value: Int) : INBTItem
+
+    fun setIntArray(key: String, value: IntArray) : INBTItem
+
+    fun setLong(key: String, value: Long) : INBTItem
+
+    fun setLongArray(key: String, value: LongArray) : INBTItem
+
+    fun setShort(key: String, value: Short) : INBTItem
+
+    fun setString(key: String, value: String) : INBTItem
+
+    fun setUUID(key: String, value: UUID) : INBTItem
+
+    fun get(key: String) : Any?
+
+    fun getBoolean(key: String) : Boolean
+
+    fun getByte(key: String) : Byte
+
+    fun getByteArray(key: String) : ByteArray
+
+    fun getCompound(key: String) : NBTCompound
+
+    fun getDouble(key: String) : Double
+
+    fun getFloat(key: String) : Float
+
+    fun getInt(key: String) : Int
+
+    fun getIntArray(key: String) : IntArray
+
+    fun getKeys() : Set<String>
+
+    fun hasKey(key: String) : Boolean
+
+    fun hasKeyOfType(key: String, type: NBTType) : Boolean
+
+    fun hasUUID(key: String) : Boolean
+
+    fun getListByte(key: String) : NBTList<Byte>
+
+    fun getListShort(key: String) : NBTList<Short>
+
+    fun getListInt(key: String) : NBTList<Int>
+
+    fun getListLong(key: String) : NBTList<Long>
+
+    fun getListFloat(key: String) : NBTList<Float>
+
+    fun getListDouble(key: String) : NBTList<Double>
+
+    fun getListByteArray(key: String) : NBTList<ByteArray>
+
+    fun getListString(key: String) : NBTList<String>
+
+    fun getListCompound(key: String) : NBTList<NBTCompound>
+
+    fun getListIntArray(key: String) : NBTList<IntArray>
+
+    fun getListLongArray(key: String) : NBTList<LongArray>
+
+    fun getLong(key: String) : Long
+
+    fun getLongArray(key: String) : LongArray
+
+    fun getShort(key: String) : Short
+
+    fun getString(key: String) : String
+
+    fun getUUID(key: String) : UUID
+
+    fun remove(key: String)
+
+    fun toNMSTagString() : String
+
+    fun merge(compound: NBTCompound) : INBTItem
+
+}
