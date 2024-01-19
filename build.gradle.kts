@@ -13,7 +13,7 @@ plugins {
 }
 
 group = "me.yoku"
-version = "5.3"
+version = "5.3.1"
 
 val mcVersion = "1.17"
 val github = Properties().apply { load(FileInputStream(File("${System.getenv("USERPROFILE")}/.m2/", "github.properties"))) }
@@ -101,17 +101,17 @@ tasks {
         archiveClassifier.set("")
         archiveVersion.set("")
 
-        minimize() {
-            exclude(project("API"))
-            exclude(project(":Core"))
-            exclude(project(":CraftBukkit_1_17_R1"))
-            exclude(project(":CraftBukkit_1_19_R1"))
-            exclude(project(":CraftBukkit_1_19_R2"))
-            exclude(project(":CraftBukkit_1_19_R3"))
-            exclude(project(":CraftBukkit_1_20_R1"))
-            exclude(project(":CraftBukkit_1_20_R2"))
-            exclude(project(":CraftBukkit_1_20_R3"))
-        }
+//        minimize() {
+//            exclude(project("API"))
+//            exclude(project(":Core"))
+//            exclude(project(":CraftBukkit_1_17_R1"))
+//            exclude(project(":CraftBukkit_1_19_R1"))
+//            exclude(project(":CraftBukkit_1_19_R2"))
+//            exclude(project(":CraftBukkit_1_19_R3"))
+//            exclude(project(":CraftBukkit_1_20_R1"))
+//            exclude(project(":CraftBukkit_1_20_R2"))
+//            exclude(project(":CraftBukkit_1_20_R3"))
+//        }
 
     }
 

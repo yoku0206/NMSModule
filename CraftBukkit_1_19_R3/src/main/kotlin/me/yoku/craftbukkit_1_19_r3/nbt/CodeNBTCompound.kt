@@ -25,7 +25,7 @@ open class CodeNBTCompound : NBTCompound<CompoundTag> {
 
     }
 
-    override fun getNMSTag() : CompoundTag { return this.tag }
+    override fun getNMSTag() : CompoundTag { return this.tag.copy() }
 
     override fun setNMSTag(tag: CompoundTag) : CodeNBTCompound {
 

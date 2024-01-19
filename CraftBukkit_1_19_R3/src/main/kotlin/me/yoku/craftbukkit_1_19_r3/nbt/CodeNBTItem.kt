@@ -205,7 +205,7 @@ open class CodeNBTItem : INBTItem<CompoundTag, ItemStack> {
 
     override fun merge(compound: NBTCompound<CompoundTag>) : INBTItem<CompoundTag, ItemStack> {
 
-        this.tag.merge((compound as CodeNBTCompound).getNMSTag())
+        this.tag.merge(compound.getNMSTag())
 
         return this
     }
