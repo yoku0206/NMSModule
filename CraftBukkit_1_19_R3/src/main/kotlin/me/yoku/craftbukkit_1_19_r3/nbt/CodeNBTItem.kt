@@ -1,9 +1,6 @@
 package me.yoku.craftbukkit_1_19_r3.nbt
 
-import me.yoku.api.CodeNBTType
-import me.yoku.api.NBTCompound
-import me.yoku.api.NBTList
-import me.yoku.api.NBTType
+import me.yoku.api.*
 import net.minecraft.nbt.CompoundTag
 import org.bukkit.Material
 import org.bukkit.craftbukkit.v1_19_R3.inventory.CraftItemStack
@@ -11,7 +8,7 @@ import org.bukkit.inventory.ItemStack
 import java.util.*
 
 @Suppress("unused")
-open class CodeNBTItem : NBTItem {
+open class CodeNBTItem : INBTItem<CompoundTag, ItemStack> {
 
     private var item: ItemStack
     private var nmsItem: net.minecraft.world.item.ItemStack
@@ -42,98 +39,98 @@ open class CodeNBTItem : NBTItem {
         return CraftItemStack.asBukkitCopy(this.nmsItem)
     }
 
-    override fun set(key: String, value: Any): NBTItem {
+    override fun set(key: String, value: Any): INBTItem<CompoundTag, ItemStack> {
 
         this.tag.merge(CodeNBTCompound().set(key, value).getNMSTag())
 
         return this
     }
 
-    override fun setBoolean(key: String, value: Boolean): NBTItem {
+    override fun setBoolean(key: String, value: Boolean): INBTItem<CompoundTag, ItemStack> {
 
         this.tag.putBoolean(key, value)
 
         return this
     }
 
-    override fun setByte(key: String, value: Byte): NBTItem {
+    override fun setByte(key: String, value: Byte): INBTItem<CompoundTag, ItemStack> {
 
         this.tag.putByte(key, value)
 
         return this
     }
 
-    override fun setByteArray(key: String, value: ByteArray): NBTItem {
+    override fun setByteArray(key: String, value: ByteArray): INBTItem<CompoundTag, ItemStack> {
 
         this.tag.putByteArray(key, value)
 
         return this
     }
 
-    override fun setCompound(key: String, value: NBTCompound): NBTItem {
+    override fun setCompound(key: String, value: NBTCompound<CompoundTag>): INBTItem<CompoundTag, ItemStack> {
 
         this.tag.merge((value as CodeNBTCompound).getNMSTag())
 
         return this
     }
 
-    override fun setDouble(key: String, value: Double): NBTItem {
+    override fun setDouble(key: String, value: Double): INBTItem<CompoundTag, ItemStack> {
 
         this.tag.putDouble(key, value)
 
         return this
     }
 
-    override fun setFloat(key: String, value: Float): NBTItem {
+    override fun setFloat(key: String, value: Float): INBTItem<CompoundTag, ItemStack> {
 
         this.tag.putFloat(key, value)
 
         return this
     }
 
-    override fun setInt(key: String, value: Int): NBTItem {
+    override fun setInt(key: String, value: Int): INBTItem<CompoundTag, ItemStack> {
 
         this.tag.putInt(key, value)
 
         return this
     }
 
-    override fun setIntArray(key: String, value: IntArray): NBTItem {
+    override fun setIntArray(key: String, value: IntArray): INBTItem<CompoundTag, ItemStack> {
 
         this.tag.putIntArray(key, value)
 
         return this
     }
 
-    override fun setLong(key: String, value: Long): NBTItem {
+    override fun setLong(key: String, value: Long): INBTItem<CompoundTag, ItemStack> {
 
         this.tag.putLong(key, value)
 
         return this
     }
 
-    override fun setLongArray(key: String, value: LongArray): NBTItem {
+    override fun setLongArray(key: String, value: LongArray): INBTItem<CompoundTag, ItemStack> {
 
         this.tag.putLongArray(key, value)
 
         return this
     }
 
-    override fun setShort(key: String, value: Short): NBTItem {
+    override fun setShort(key: String, value: Short): INBTItem<CompoundTag, ItemStack> {
 
         this.tag.putShort(key, value)
 
         return this
     }
 
-    override fun setString(key: String, value: String): NBTItem {
+    override fun setString(key: String, value: String): INBTItem<CompoundTag, ItemStack> {
 
         this.tag.putString(key, value)
 
         return this
     }
 
-    override fun setUUID(key: String, value: UUID): NBTItem {
+    override fun setUUID(key: String, value: UUID): INBTItem<CompoundTag, ItemStack> {
 
         this.tag.putUUID(key, value)
 
@@ -148,7 +145,7 @@ open class CodeNBTItem : NBTItem {
 
     override fun getByteArray(key: String): ByteArray { return this.tag.getByteArray(key) }
 
-    override fun getCompound(key: String): NBTCompound { return CodeNBTCompound(this.tag.getCompound(key)) }
+    override fun getCompound(key: String): NBTCompound<CompoundTag> { return CodeNBTCompound(this.tag.getCompound(key)) }
 
     override fun getDouble(key: String): Double { return this.tag.getDouble(key) }
 
@@ -166,9 +163,7 @@ open class CodeNBTItem : NBTItem {
 
     override fun hasUUID(key: String): Boolean { return this.tag.hasUUID(key) }
 
-    private fun <T> getList(key: String, type: NBTType) : CodeNBTList<T> {
-        return CodeNBTList(this.tag.getList(key, CodeNBTType.toNMS(type).toInt()))
-    }
+    private fun <T> getList(key: String, type: NBTType) : CodeNBTList<T> { return CodeNBTList(this.tag.getList(key, CodeNBTType.toNMS(type).toInt())) }
 
     override fun getListByte(key: String): NBTList<Byte> { return getList(key, NBTType.BYTE) }
 
@@ -186,7 +181,7 @@ open class CodeNBTItem : NBTItem {
 
     override fun getListString(key: String): NBTList<String> { return getList(key, NBTType.STRING) }
 
-    override fun getListCompound(key: String): NBTList<NBTCompound> { return getList(key, NBTType.COMPOUND) }
+    override fun getListCompound(key: String): NBTList<NBTCompound<CompoundTag>> { return getList(key, NBTType.COMPOUND) }
 
     override fun getListIntArray(key: String): NBTList<IntArray> { return getList(key, NBTType.INTEGER_ARRAY) }
 
@@ -208,7 +203,7 @@ open class CodeNBTItem : NBTItem {
 
     override fun getCompoundTag() : CompoundTag { return this.tag }
 
-    override fun merge(compound: NBTCompound) : NBTItem {
+    override fun merge(compound: NBTCompound<CompoundTag>) : INBTItem<CompoundTag, ItemStack> {
 
         this.tag.merge((compound as CodeNBTCompound).getNMSTag())
 
@@ -217,7 +212,7 @@ open class CodeNBTItem : NBTItem {
 
     companion object {
 
-        fun convertStringToNBTItem(item: String) : NBTItem? {
+        fun convertStringToNBTItem(item: String) : INBTItem<CompoundTag, ItemStack>? {
 
             if (item.isEmpty()) return null
 

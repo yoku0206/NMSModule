@@ -13,7 +13,7 @@ plugins {
 }
 
 group = "me.yoku"
-version = "5.2"
+version = "5.3"
 
 val mcVersion = "1.17"
 val github = Properties().apply { load(FileInputStream(File("${System.getenv("USERPROFILE")}/.m2/", "github.properties"))) }
@@ -43,7 +43,7 @@ subprojects {
     }
 
     group = parent?.group ?: "me.yoku"
-    version = parent?.version ?: "5.2"
+    version = parent?.version ?: "5.3"
 
     tasks.compileKotlin {
         kotlinOptions.jvmTarget = "11"

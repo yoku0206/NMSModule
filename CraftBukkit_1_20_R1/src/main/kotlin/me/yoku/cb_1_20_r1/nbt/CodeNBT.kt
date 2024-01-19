@@ -32,7 +32,7 @@ abstract class CodeNBT : NBTAbstract {
             return when (data) {
                 is ByteArray -> ByteArrayTag(data)
                 is Byte -> ByteTag.valueOf(data)
-                is NBTCompound -> (data as CodeNBTCompound).getNMSTag()
+                is NBTCompound<*> -> (data as CodeNBTCompound).getNMSTag()
                 is Double -> DoubleTag.valueOf(data)
                 is Float -> FloatTag.valueOf(data)
                 is IntArray -> IntArrayTag(data)
@@ -46,7 +46,7 @@ abstract class CodeNBT : NBTAbstract {
             }
         }
 
-        fun parseTag(nbt: String) : NBTCompound {
+        fun parseTag(nbt: String) : NBTCompound<CompoundTag> {
 
             val tag: CompoundTag
 

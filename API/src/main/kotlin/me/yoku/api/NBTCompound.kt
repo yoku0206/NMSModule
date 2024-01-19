@@ -2,9 +2,13 @@ package me.yoku.api
 
 import java.util.*
 
-interface NBTCompound : NBTAbstract {
+interface NBTCompound<T> : NBTAbstract {
 
-    fun clone() : NBTCompound
+    fun getNMSTag() : T
+
+    fun setNMSTag(tag: T) : NBTCompound<T>
+
+    fun clone() : NBTCompound<T>
 
     fun getType(key: String) : NBTType
 
@@ -16,7 +20,7 @@ interface NBTCompound : NBTAbstract {
 
     fun getByteArray(key: String) : ByteArray
 
-    fun getCompound(key: String) : NBTCompound
+    fun getCompound(key: String) : NBTCompound<T>
 
     fun getDouble(key: String) : Double
 
@@ -54,7 +58,7 @@ interface NBTCompound : NBTAbstract {
 
     fun getListList(key: String) : NBTList<NBTList<Any>>
 
-    fun getListCompound(key: String) : NBTList<NBTCompound>
+    fun getListCompound(key: String) : NBTList<NBTCompound<T>>
 
     fun getListIntArray(key: String) : NBTList<Array<Int>>
 
@@ -72,34 +76,34 @@ interface NBTCompound : NBTAbstract {
 
     fun remove(key: String)
 
-    fun set(key: String, value: Any) : NBTCompound
+    fun set(key: String, value: Any) : NBTCompound<T>
 
-    fun setBoolean(key: String, value: Boolean) : NBTCompound
+    fun setBoolean(key: String, value: Boolean) : NBTCompound<T>
 
-    fun setByte(key: String, value: Byte) : NBTCompound
+    fun setByte(key: String, value: Byte) : NBTCompound<T>
 
-    fun setByteArray(key: String, value: ByteArray) : NBTCompound
+    fun setByteArray(key: String, value: ByteArray) : NBTCompound<T>
 
-    fun setCompound(key: String, value: NBTCompound) : NBTCompound
+    fun setCompound(key: String, value: NBTCompound<T>) : NBTCompound<T>
 
-    fun setDouble(key: String, value: Double) : NBTCompound
+    fun setDouble(key: String, value: Double) : NBTCompound<T>
 
-    fun setFloat(key: String, value: Float) : NBTCompound
+    fun setFloat(key: String, value: Float) : NBTCompound<T>
 
-    fun setInt(key: String, value: Int) : NBTCompound
+    fun setInt(key: String, value: Int) : NBTCompound<T>
 
-    fun setIntArray(key: String, value: IntArray) : NBTCompound
+    fun setIntArray(key: String, value: IntArray) : NBTCompound<T>
 
-    fun <T> setList(key: String, value: NBTList<T>) : NBTCompound
+    fun <R> setList(key: String, value: NBTList<R>) : NBTCompound<T>
 
-    fun setLong(key: String, value: Long) : NBTCompound
+    fun setLong(key: String, value: Long) : NBTCompound<T>
 
-    fun setLongArray(key: String, value: LongArray) : NBTCompound
+    fun setLongArray(key: String, value: LongArray) : NBTCompound<T>
 
-    fun setShort(key: String, value: Short) : NBTCompound
+    fun setShort(key: String, value: Short) : NBTCompound<T>
 
-    fun setString(key: String, value: String) : NBTCompound
+    fun setString(key: String, value: String) : NBTCompound<T>
 
-    fun setUUID(key: String, value: UUID) : NBTCompound
+    fun setUUID(key: String, value: UUID) : NBTCompound<T>
 
 }

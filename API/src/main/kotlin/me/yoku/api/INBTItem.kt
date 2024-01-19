@@ -2,35 +2,35 @@ package me.yoku.api
 
 import java.util.*
 
-interface INBTItem {
+interface INBTItem<Tag, Item> {
 
-    fun set(key: String, value: Any) : INBTItem
+    fun set(key: String, value: Any) : INBTItem<Tag, Item>
 
-    fun setBoolean(key: String, value: Boolean) : INBTItem
+    fun setBoolean(key: String, value: Boolean) : INBTItem<Tag, Item>
 
-    fun setByte(key: String, value: Byte) : INBTItem
+    fun setByte(key: String, value: Byte) : INBTItem<Tag, Item>
 
-    fun setByteArray(key: String, value: ByteArray) : INBTItem
+    fun setByteArray(key: String, value: ByteArray) : INBTItem<Tag, Item>
 
-    fun setCompound(key: String, value: NBTCompound) : INBTItem
+    fun setCompound(key: String, value: NBTCompound<Tag>) : INBTItem<Tag, Item>
 
-    fun setDouble(key: String, value: Double) : INBTItem
+    fun setDouble(key: String, value: Double) : INBTItem<Tag, Item>
 
-    fun setFloat(key: String, value: Float) : INBTItem
+    fun setFloat(key: String, value: Float) : INBTItem<Tag, Item>
 
-    fun setInt(key: String, value: Int) : INBTItem
+    fun setInt(key: String, value: Int) : INBTItem<Tag, Item>
 
-    fun setIntArray(key: String, value: IntArray) : INBTItem
+    fun setIntArray(key: String, value: IntArray) : INBTItem<Tag, Item>
 
-    fun setLong(key: String, value: Long) : INBTItem
+    fun setLong(key: String, value: Long) : INBTItem<Tag, Item>
 
-    fun setLongArray(key: String, value: LongArray) : INBTItem
+    fun setLongArray(key: String, value: LongArray) : INBTItem<Tag, Item>
 
-    fun setShort(key: String, value: Short) : INBTItem
+    fun setShort(key: String, value: Short) : INBTItem<Tag, Item>
 
-    fun setString(key: String, value: String) : INBTItem
+    fun setString(key: String, value: String) : INBTItem<Tag, Item>
 
-    fun setUUID(key: String, value: UUID) : INBTItem
+    fun setUUID(key: String, value: UUID) : INBTItem<Tag, Item>
 
     fun get(key: String) : Any?
 
@@ -40,7 +40,7 @@ interface INBTItem {
 
     fun getByteArray(key: String) : ByteArray
 
-    fun getCompound(key: String) : NBTCompound
+    fun getCompound(key: String) : NBTCompound<Tag>
 
     fun getDouble(key: String) : Double
 
@@ -74,7 +74,7 @@ interface INBTItem {
 
     fun getListString(key: String) : NBTList<String>
 
-    fun getListCompound(key: String) : NBTList<NBTCompound>
+    fun getListCompound(key: String) : NBTList<NBTCompound<Tag>>
 
     fun getListIntArray(key: String) : NBTList<IntArray>
 
@@ -94,6 +94,10 @@ interface INBTItem {
 
     fun toNMSTagString() : String
 
-    fun merge(compound: NBTCompound) : INBTItem
+    fun merge(compound: NBTCompound<Tag>) : INBTItem<Tag, Item>
+
+    fun getItem() : Item
+
+    fun getCompoundTag() : Tag
 
 }

@@ -9,7 +9,7 @@ import net.minecraft.nbt.ListTag
 import java.util.*
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")
-open class CodeNBTCompound : NBTCompound {
+open class CodeNBTCompound : NBTCompound<CompoundTag> {
 
     private var tag: CompoundTag
 
@@ -25,9 +25,9 @@ open class CodeNBTCompound : NBTCompound {
 
     }
 
-    fun getNMSTag() : CompoundTag { return this.tag }
+    override fun getNMSTag() : CompoundTag { return this.tag }
 
-    fun setNMSTag(tag: CompoundTag) : CodeNBTCompound {
+    override fun setNMSTag(tag: CompoundTag) : CodeNBTCompound {
 
         this.tag = tag
 
@@ -121,7 +121,7 @@ open class CodeNBTCompound : NBTCompound {
         return getList(key, NBTType.LIST)
     }
 
-    override fun getListCompound(key: String) : NBTList<NBTCompound> {
+    override fun getListCompound(key: String) : NBTList<NBTCompound<CompoundTag>> {
         return getList(key, NBTType.COMPOUND)
     }
 
@@ -181,7 +181,7 @@ open class CodeNBTCompound : NBTCompound {
         return this
     }
 
-    override fun setCompound(key: String, value: NBTCompound) : CodeNBTCompound {
+    override fun setCompound(key: String, value: NBTCompound<CompoundTag>) : CodeNBTCompound {
         getNMSTag().put(key, (value as CodeNBTCompound).getNMSTag())
 
         return this
@@ -271,7 +271,7 @@ open class CodeNBTCompound : NBTCompound {
         return getNMSTag().getByteArray(key)
     }
 
-    override fun getCompound(key: String): NBTCompound {
+    override fun getCompound(key: String): NBTCompound<CompoundTag> {
 
         var compound = getNMSTag().getCompound(key)
 
