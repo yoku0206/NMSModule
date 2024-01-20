@@ -9,17 +9,25 @@ import net.minecraft.nbt.ListTag
 import java.util.*
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")
-open class CodeNBTCompound : NBTCompound<CompoundTag> {
+open class CodeNBTCompound : NBTCompound {
 
     private var tag: CompoundTag
 
-    constructor() { this.tag = CompoundTag() }
+    constructor() {
 
-    constructor(tag: CompoundTag) { this.tag = tag }
+        this.tag = CompoundTag()
 
-    override fun getNMSTag() : CompoundTag { return this.tag }
+    }
 
-    override fun setNMSTag(tag: CompoundTag) : CodeNBTCompound {
+    constructor(tag: CompoundTag) {
+
+        this.tag = tag
+
+    }
+
+    fun getNMSTag() : CompoundTag { return this.tag }
+
+    fun setNMSTag(tag: CompoundTag) : NBTCompound {
 
         this.tag = tag
 
@@ -49,6 +57,7 @@ open class CodeNBTCompound : NBTCompound<CompoundTag> {
         }
 
         return CodeNBTList(nbtTagList)
+
     }
 
     fun <T> getList(key: String, type: NBTType) : NBTList<T> {
@@ -59,9 +68,11 @@ open class CodeNBTCompound : NBTCompound<CompoundTag> {
 
             nbtTagList = ListTag()
             getNMSTag().put(key, nbtTagList)
+
         }
 
         return CodeNBTList(nbtTagList)
+
     }
 
     override fun getListByte(key: String) : NBTList<Byte> { return getList(key, NBTType.BYTE) }
@@ -82,7 +93,7 @@ open class CodeNBTCompound : NBTCompound<CompoundTag> {
 
     override fun getListList(key: String) : NBTList<NBTList<Any>> { return getList(key, NBTType.LIST) }
 
-    override fun getListCompound(key: String) : NBTList<NBTCompound<CompoundTag>> { return getList(key, NBTType.COMPOUND) }
+    override fun getListCompound(key: String) : NBTList<NBTCompound> { return getList(key, NBTType.COMPOUND) }
 
     override fun getListIntArray(key: String) : NBTList<Array<Int>> { return getList(key, NBTType.INTEGER_ARRAY) }
 
@@ -124,7 +135,7 @@ open class CodeNBTCompound : NBTCompound<CompoundTag> {
         return this
     }
 
-    override fun setCompound(key: String, value: NBTCompound<CompoundTag>) : CodeNBTCompound {
+    override fun setCompound(key: String, value: NBTCompound) : CodeNBTCompound {
         getNMSTag().put(key, (value as CodeNBTCompound).getNMSTag())
 
         return this
@@ -202,7 +213,7 @@ open class CodeNBTCompound : NBTCompound<CompoundTag> {
 
     override fun getByteArray(key: String) : ByteArray { return getNMSTag().getByteArray(key) }
 
-    override fun getCompound(key: String) : NBTCompound<CompoundTag> {
+    override fun getCompound(key: String) : NBTCompound {
 
         var compound = getNMSTag().getCompound(key)
 
